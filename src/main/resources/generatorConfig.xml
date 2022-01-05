@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="C:/Users/John/.m2/repository/mysql/mysql-connector-java/8.0.27/mysql-connector-java-8.0.27.jar" />
+	<context id="moneynote_mybatis_generator"
+		defaultModelType="flat" targetRuntime="MyBatis3Simple"><!-- 產生的model為flat型式。產生傳統的MyBatis 
+			Mapper及可，不要產生新的Example檔 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /><!-- 不要產生MBG的註解 -->
+			<property name="suppressDate" value="true" /><!-- 不要產生日期註解 -->
+		</commentGenerator>
+		<jdbcConnection
+			connectionURL="jdbc:mysql://localhost:3306/moneynote"
+			driverClass="com.mysql.cj.jdbc.Driver" password="!QAZ2wsx"
+			userId="shawn" />
+		<javaTypeResolver>
+			<property name="useJSR310Types" value="true" /><!-- 日期或時間戳記不使用java.util.Date，改用Java 
+				8的java.time.LocalDate -->
+		</javaTypeResolver>
+		<!-- 要產生的model位置，targetProject的值為專案的Source folder，所以是moneynote/src/main/java -->
+		<javaModelGenerator targetPackage="idv.shawn.entity"
+			targetProject="currencytracking/src/main/java" />
+		<!-- 要產生的MyBatis Mapper位置 -->
+		<sqlMapGenerator targetPackage="idv.shawn.mapper"
+			targetProject="currencytracking/src/main/java" />
+		<!-- 要產生的MyBatis Dao位置 -->
+		<javaClientGenerator targetPackage="idv.shawn.dao"
+			targetProject="currencytracking/src/main/java" type="XMLMAPPER" /><!-- MyBatis 
+			Mapper設為xml格式 -->
+		<!-- 要生成的資料表 -->
+		<table tableName="member">
+			<columnOverride column="member_id"
+				javaType="java.lang.Long" jdbcType="BIGINT" /><!-- 因為id為unsigned BIGINT所做的設定 -->
+		</table>
+		<table tableName="expense_record">
+			<columnOverride column="expense_id"
+				javaType="java.lang.Long" jdbcType="BIGINT" />
+			<columnOverride column="member_id"
+				javaType="java.lang.Long" jdbcType="BIGINT" />
+		</table>
+	</context>
+</generatorConfiguration>
+
